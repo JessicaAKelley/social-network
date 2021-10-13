@@ -11,12 +11,15 @@ app.use(express.urlencoded({ extended: true }));
 const MONGODB_URI =
     process.env.MONGODB_URI || "mongodb://localhost/socialnetwork";
 const CONFIGS = {
-    useFindAndModify: false,
+    // useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    // useCreateIndex: true,
+    // debug: true,
 };
 
 mongoose.connect(MONGODB_URI, CONFIGS);
 
-mongoose.set("useCreatedIndex", true);
-mongoose.set("debug", true);
+app.use(require("./routes"));
+
+app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
